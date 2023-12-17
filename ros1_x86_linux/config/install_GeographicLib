@@ -1,0 +1,10 @@
+#!/bin/bash
+rm -rf GeographicLib-2.3
+tar -xf GeographicLib-2.3.tar.gz
+cd GeographicLib-2.3
+mkdir -p BUILD
+cd BUILD
+cmake ..
+make
+sudo make install
+

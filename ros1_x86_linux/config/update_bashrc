@@ -1,0 +1,9 @@
+# Adding all the necessary ros sourcing
+echo "" >> ~/.bashrc
+echo "## ROS" >> ~/.bashrc
+echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc
+echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
+echo "" >> ~/.bashrc
+echo "export DISPLAY=:1" >> ~/.bashrc
+echo "set +e" >> ~/.bashrc
+echo "PS1='${debian_chroot:+($debian_chroot)}ros1_x86_linux:\W\$ '" >> ~/.bashrc
