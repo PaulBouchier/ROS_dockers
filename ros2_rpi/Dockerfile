@@ -1,5 +1,5 @@
 ARG ROS_DISTRO=humble
-FROM osrf/ros:${ROS_DISTRO}-desktop-full-jammy as base
+FROM arm64v8/ros:${ROS_DISTRO}-ros-base as base
 ENV ROS_DISTRO=${ROS_DISTRO}
 SHELL ["/bin/bash", "-c"]
 
@@ -13,13 +13,12 @@ RUN apt-get -qq --no-install-recommends install git vim-gtk3 sudo less \
   && apt-get -qq --no-install-recommends install inetutils-ping inetutils-traceroute net-tools \
   && apt-get -qq --no-install-recommends install xterm terminator \
   && apt-get -qq --no-install-recommends install python-is-python3 \
-  && apt-get -qq --no-install-recommends install python3-pip \
-  && apt-get -qq --no-install-recommends install software-properties-common
+  && apt-get -qq --no-install-recommends install python3-pip
 
 # Install needed ROS packages
-RUN apt-get -qq --no-install-recommends install ros-${ROS_DISTRO}-swri-console
-RUN apt-get -qq --no-install-recommends install ros-${ROS_DISTRO}-plotjuggler
-RUN apt-get -qq --no-install-recommends install python3-colcon-common-extensions
+RUN apt-get -qq --no-install-recommends install ros-${ROS_DISTRO}-turtlesim \
+  && apt-get -qq --no-install-recommends install ros-${ROS_DISTRO}-desktop \
+  && apt-get -qq --no-install-recommends install ros-${ROS_DISTRO}-swri-console
 
 # Configure sudo.
 RUN ex +"%s/^%sudo.*$/%sudo ALL=(ALL:ALL) NOPASSWD:ALL/g" -scwq! /etc/sudoers

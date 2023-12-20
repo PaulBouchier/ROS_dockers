@@ -8,4 +8,4 @@ echo "" >> ~/.bashrc
 
 echo "export DISPLAY=:1" >> ~/.bashrc
 echo "set +e" >> ~/.bashrc
-echo "PS1='${debian_chroot:+($debian_chroot)}ros2_x86_linux:\W\$ '" >> ~/.bashrc
+echo "PS1='${debian_chroot:+($debian_chroot)}rpi_ros2:\W\$ '" >> ~/.bashrc

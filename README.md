@@ -15,7 +15,9 @@ The repo should be supported by the following environment variables and aliases 
     # Docker aliases
     export PATH_TO_ROS_DOCKERS='${HOME}/Documents/Robotics/ROS_dockers'
     export ACTIVE_DOCKER=ros2_x86_linux
+
     alias docker_build='cd ${PATH_TO_ROS_DOCKERS}/${ACTIVE_DOCKER} && docker build -t ${ACTIVE_DOCKER}'
+    alias dr='cd ${PATH_TO_ROS_DOCKERS}/${ACTIVE_DOCKER} && ./run_it.sh $@'
     alias dsl='docker start -ai `docker ps -lq`'
     alias de='docker exec -it `docker ps -lq` bash'
 

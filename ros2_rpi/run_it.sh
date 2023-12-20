@@ -25,14 +25,15 @@ docker run                                                     \
     ${RM}                                                      \
     --privileged                                               \
     -v $home/.bash_history:$home/.bash_history                 \
-    -v $home/catkin_ws:$home/catkin_ws                         \
+    -v $home/ros2_ws:$home/ros2_ws                             \
     -v $home/bag_files:$home/bag_files                         \
-    -v $(dirname $SSH_AUTH_SOCK):$(dirname $SSH_AUTH_SOCK):ro  \
     -v /tmp/.X11-unix:/tmp/.X11-unix                           \
     -v /tmp:/tmp                                               \
-    -e SSH_AUTH_SOCK=$SSH_AUTH_SOCK                            \
     --user $user                                               \
     -w $home                                                   \
     -i                                                         \
     ${ACTIVE_DOCKER}                                           \
     $@
+
+#    -v $(dirname $SSH_AUTH_SOCK):$(dirname $SSH_AUTH_SOCK):ro  \
+#    -e SSH_AUTH_SOCK=$SSH_AUTH_SOCK                            \

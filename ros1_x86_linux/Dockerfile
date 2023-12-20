@@ -38,11 +38,8 @@ RUN ex +"%s/^%sudo.*$/%sudo ALL=(ALL:ALL) NOPASSWD:ALL/g" -scwq! /etc/sudoers
 RUN groupadd bouchier && useradd -ms /bin/bash -g bouchier bouchier
 RUN adduser bouchier sudo
 RUN echo 'bouchier:bouchier root:Paul129' | chpasswd
-#RUN mkdir -p /home/bouchier
 RUN echo `ls -l /home`
 RUN echo `grep bouchier /etc/passwd`
-#RUN echo `grep bouchier /etc/group`
-#RUN chown -R bouchier:root /home/bouchier
 RUN echo `ls -als /home`
 RUN echo `ls -als /home/bouchier`
 

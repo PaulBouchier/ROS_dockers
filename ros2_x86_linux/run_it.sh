@@ -18,7 +18,7 @@ if [ $# -ne 0 ]; then
   fi
 fi    
 
-echo "running docker with home " $home " user " $user 
+echo "running ${ACTIVE_DOCKER} docker with home " $home " user " $user 
 docker run                                                     \
     --net=host                                                 \
     -t                                                         \
