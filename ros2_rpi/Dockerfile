@@ -9,7 +9,7 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
 RUN apt-get -qq update
 RUN apt-get -y upgrade
 RUN apt-get -qq --no-install-recommends install apt-utils
-RUN apt-get -qq --no-install-recommends install git vim-gtk3 sudo less \
+RUN apt-get -qq --no-install-recommends install git vim-gtk3 sudo less wget \
   && apt-get -qq --no-install-recommends install inetutils-ping inetutils-traceroute net-tools \
   && apt-get -qq --no-install-recommends install xterm terminator \
   && apt-get -qq --no-install-recommends install python-is-python3 \
