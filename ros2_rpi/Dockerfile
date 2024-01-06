@@ -52,9 +52,6 @@ RUN sudo chmod +x /sbin/update_bashrc ; sudo chown bouchier /sbin/update_bashrc 
 COPY config/entrypoint.sh /ros_entrypoint.sh
 RUN sudo chmod +x /ros_entrypoint.sh ; sudo chown bouchier /ros_entrypoint.sh ;
 
-# Clean image
-RUN sudo apt-get clean && sudo rm -rf /var/lib/apt/lists/* 
-
 # startup environment
 WORKDIR /home/bouchier
 ENTRYPOINT ["/ros_entrypoint.sh"]
