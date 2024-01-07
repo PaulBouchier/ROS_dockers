@@ -1,6 +1,13 @@
 ARG ROS_DISTRO=humble
 FROM arm64v8/ros:${ROS_DISTRO}-ros-base as base
 ENV ROS_DISTRO=${ROS_DISTRO}
+
+##########################
+# Set username/passwd here
+##########################
+ARG CONFIGURED_USER=bouchier
+ARG CONFIGURED_PASSWD=Docker
+
 SHELL ["/bin/bash", "-c"]
 
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
@@ -24,9 +31,9 @@ RUN apt-get -qq --no-install-recommends install ros-${ROS_DISTRO}-turtlesim \
 RUN ex +"%s/^%sudo.*$/%sudo ALL=(ALL:ALL) NOPASSWD:ALL/g" -scwq! /etc/sudoers
 
 # Setup the default user.
-RUN groupadd bouchier && useradd -ms /bin/bash -g bouchier bouchier
-RUN adduser bouchier sudo
-RUN echo 'bouchier:bouchier root:Paul129' | chpasswd
+RUN groupadd ${CONFIGURED_USER} && useradd -ms /bin/bash -g ${CONFIGURED_USER} ${CONFIGURED_USER} 
+RUN adduser ${CONFIGURED_USER} sudo
+RUN echo ${CONFIGURED_USER}\:${CONFIGURED_USER}\ root\:Docker | chpasswd
 
 # Use ccache
 ENV USE_CCACHE 1
@@ -37,17 +44,17 @@ ENV PATH /usr/lib/ccache:$PATH
 ENV QT_GRAPHICSSYSTEM native
 
 # add environment changes to .bashrc
-WORKDIR /home/bouchier
-USER bouchier
+WORKDIR /home/${CONFIGURED_USER} 
+USER ${CONFIGURED_USER} 
 COPY config/update_bashrc /sbin/update_bashrc
-RUN sudo chmod +x /sbin/update_bashrc ; sudo chown bouchier /sbin/update_bashrc ; sync ; /bin/bash -c /sbin/update_bashrc ; sudo rm /sbin/update_bashrc
+RUN sudo chmod +x /sbin/update_bashrc ; sudo chown ${CONFIGURED_USER} /sbin/update_bashrc ; sync ; /bin/bash -c /sbin/update_bashrc ; sudo rm /sbin/update_bashrc
 
 # Change entrypoint to source ~/.bashrc and start in ~
 COPY config/entrypoint.sh /ros_entrypoint.sh
-RUN sudo chmod +x /ros_entrypoint.sh ; sudo chown bouchier /ros_entrypoint.sh ;
+RUN sudo chmod +x /ros_entrypoint.sh ; sudo chown ${CONFIGURED_USER} /ros_entrypoint.sh ;
 
 # startup environment
-WORKDIR /home/bouchier
+WORKDIR /home/${CONFIGURED_USER} 
 ENTRYPOINT ["/ros_entrypoint.sh"]
 CMD ["bash"]
 

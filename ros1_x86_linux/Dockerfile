@@ -25,6 +25,7 @@ RUN apt-get -qq --no-install-recommends install ros-${ROS_DISTRO}-plotjuggler
 RUN apt-get -qq --no-install-recommends install ros-${ROS_DISTRO}-xacro \
   && apt-get -qq --no-install-recommends install ros-${ROS_DISTRO}-robot-state-publisher \
   && apt-get -qq --no-install-recommends install ros-${ROS_DISTRO}-mavros-msgs \
+  && apt-get -qq --no-install-recommends install ros-${ROS_DISTRO}-effort-controllers \
   && apt-get -qq --no-install-recommends install ros-${ROS_DISTRO}-nmea-msgs \
   && apt-get -qq --no-install-recommends install ros-${ROS_DISTRO}-costmap-2d \
   && apt-get -qq --no-install-recommends install ros-${ROS_DISTRO}-grid-map-ros \
