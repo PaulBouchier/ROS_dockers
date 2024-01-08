@@ -27,6 +27,9 @@ RUN apt-get -qq --no-install-recommends install ros-${ROS_DISTRO}-turtlesim \
   && apt-get -qq --no-install-recommends install ros-${ROS_DISTRO}-desktop \
   && apt-get -qq --no-install-recommends install ros-${ROS_DISTRO}-swri-console
 
+RUN apt-get -qq --no-install-recommends install ros-${ROS_DISTRO}-tf-transformations
+RUN pip3 install transforms3d
+
 # Configure sudo.
 RUN ex +"%s/^%sudo.*$/%sudo ALL=(ALL:ALL) NOPASSWD:ALL/g" -scwq! /etc/sudoers
 

@@ -28,6 +28,9 @@ RUN apt-get -qq --no-install-recommends install git vim-gtk3 sudo less \
 RUN apt-get -qq --no-install-recommends install ros-${ROS_DISTRO}-swri-console
 RUN apt-get -qq --no-install-recommends install ros-${ROS_DISTRO}-plotjuggler
 RUN apt-get -qq --no-install-recommends install python3-colcon-common-extensions
+RUN apt-get -qq --no-install-recommends install ros-${ROS_DISTRO}-tf-transformations
+RUN pip3 install transforms3d
+
 
 # Configure sudo.
 RUN ex +"%s/^%sudo.*$/%sudo ALL=(ALL:ALL) NOPASSWD:ALL/g" -scwq! /etc/sudoers
