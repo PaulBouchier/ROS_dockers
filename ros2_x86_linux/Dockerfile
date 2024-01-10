@@ -54,6 +54,9 @@ USER ${CONFIGURED_USER}
 COPY config/update_bashrc /sbin/update_bashrc
 RUN sudo chmod +x /sbin/update_bashrc ; sudo chown ${CONFIGURED_USER} /sbin/update_bashrc ; sync ; /bin/bash -c /sbin/update_bashrc ; sudo rm /sbin/update_bashrc
 
+# run rosdep update
+RUN rosdep update
+
 # Change entrypoint to source ~/.bashrc and start in ~
 COPY config/entrypoint.sh /ros_entrypoint.sh
 RUN sudo chmod +x /ros_entrypoint.sh ; sudo chown ${CONFIGURED_USER} /ros_entrypoint.sh ;
