@@ -30,6 +30,7 @@ RUN apt-get -qq --no-install-recommends install ros-${ROS_DISTRO}-turtlesim \
 RUN apt-get -qq --no-install-recommends install ros-${ROS_DISTRO}-tf-transformations
 RUN pip3 install transforms3d
 RUN apt-get -qq --no-install-recommends install nano
+RUN pip install setuptools==58.2.0
 
 # Configure sudo.
 RUN ex +"%s/^%sudo.*$/%sudo ALL=(ALL:ALL) NOPASSWD:ALL/g" -scwq! /etc/sudoers
