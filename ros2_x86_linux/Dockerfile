@@ -2,6 +2,7 @@ ARG ROS_DISTRO=humble
 
 FROM osrf/ros:${ROS_DISTRO}-desktop-full-jammy as base
 ENV ROS_DISTRO=${ROS_DISTRO}
+ENV TZ="America/Chicago"
 
 ##########################
 # Set username/passwd here

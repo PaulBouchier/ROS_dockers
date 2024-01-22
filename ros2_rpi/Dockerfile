@@ -1,6 +1,7 @@
 ARG ROS_DISTRO=humble
 FROM arm64v8/ros:${ROS_DISTRO}-ros-base as base
 ENV ROS_DISTRO=${ROS_DISTRO}
+ENV TZ="America/Chicago"
 
 ##########################
 # Set username/passwd here
