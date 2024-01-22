@@ -9,3 +9,5 @@ echo "" >> ~/.bashrc
 echo "export DISPLAY=:1" >> ~/.bashrc
 echo "set +e" >> ~/.bashrc
 echo "PS1='${debian_chroot:+($debian_chroot)}ros2_x86_linux:\W\$ '" >> ~/.bashrc
+echo "" >> ~/.bashrc
+echo "alias rosclean='cd ~/ros2_ws && rm -r build install log'" >> ~/.bashrc
