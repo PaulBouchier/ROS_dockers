@@ -28,6 +28,8 @@ RUN apt-get -qq --no-install-recommends install ros-${ROS_DISTRO}-turtlesim \
   && apt-get -qq --no-install-recommends install ros-${ROS_DISTRO}-swri-console
 
 RUN apt-get -qq --no-install-recommends install ros-${ROS_DISTRO}-tf-transformations
+RUN apt-get -qq --no-install-recommends install ros-${ROS_DISTRO}-plotjuggler
+RUN apt-get -qq --no-install-recommends install ros-${ROS_DISTRO}-plotjuggler-ros
 RUN pip3 install transforms3d
 RUN apt-get -qq --no-install-recommends install nano
 RUN pip install setuptools==58.2.0
