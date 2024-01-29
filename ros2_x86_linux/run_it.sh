@@ -4,9 +4,6 @@
 
 set -u # Treat empty variables as an error.
 
-# Some useful values
-user="bouchier"
-home="/home/$user"
 RM="--rm"
 
 # support the -keep argument to not remove the container upon exit
@@ -18,21 +15,20 @@ if [ $# -ne 0 ]; then
   fi
 fi    
 
-echo "running ${ACTIVE_DOCKER} docker with home " $home " user " $user 
+echo "running ${ACTIVE_DOCKER} docker with home " $HOME " user " $USER 
 docker run                                                     \
     --net=host                                                 \
     -t                                                         \
     ${RM}                                                      \
     --privileged                                               \
-    -v $home/.bash_history:$home/.bash_history                 \
-    -v $home/ros2_ws:$home/ros2_ws                             \
-    -v $home/bag_files:$home/bag_files                         \
-    -v $(dirname $SSH_AUTH_SOCK):$(dirname $SSH_AUTH_SOCK):ro  \
+    -v $HOME/.bash_history:$HOME/.bash_history                 \
+    -v $HOME/ros2_ws:$HOME/ros2_ws                             \
+    -v $HOME/bag_files:$HOME/bag_files                         \
     -v /tmp/.X11-unix:/tmp/.X11-unix                           \
     -v /tmp:/tmp                                               \
-    -e SSH_AUTH_SOCK=$SSH_AUTH_SOCK                            \
-    --user $user                                               \
-    -w $home                                                   \
+    --user $USER                                               \
+    -w $HOME                                                   \
     -i                                                         \
     ${ACTIVE_DOCKER}                                           \
     $@
+
