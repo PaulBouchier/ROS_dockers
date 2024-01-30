@@ -6,7 +6,6 @@ echo "source ~/ros2_ws/install/setup.bash" >> ~/.bashrc
 echo "export ROS_DOMAIN_ID=9" >> ~/.bashrc
 echo "" >> ~/.bashrc
 
-echo "export DISPLAY=:1" >> ~/.bashrc
 echo "set +e" >> ~/.bashrc
 echo "PS1='${debian_chroot:+($debian_chroot)}ros2_rpi:\W\$ '" >> ~/.bashrc
 echo "" >> ~/.bashrc

@@ -4,12 +4,6 @@ FROM osrf/ros:${ROS_DISTRO}-desktop-full-jammy as base
 ENV ROS_DISTRO=${ROS_DISTRO}
 ENV TZ="America/Chicago"
 
-##########################
-# Set username/passwd here
-##########################
-ARG CONFIGURED_USER=bouchier
-ARG CONFIGURED_PASSWD=Docker
-
 SHELL ["/bin/bash", "-c"]
 
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
@@ -39,6 +33,14 @@ RUN pip install setuptools==58.2.0
 RUN ex +"%s/^%sudo.*$/%sudo ALL=(ALL:ALL) NOPASSWD:ALL/g" -scwq! /etc/sudoers
 
 # Setup the default user.
+##########################
+# Set username/passwd here
+##########################
+ARG CONFIGURED_USER=bouchier
+ARG CONFIGURED_PASSWD=Docker
+ARG DISPLAY=:1
+ENV DISPLAY=${DISPLAY}
+
 RUN groupadd ${CONFIGURED_USER} && useradd -ms /bin/bash -g ${CONFIGURED_USER} ${CONFIGURED_USER}
 RUN adduser ${CONFIGURED_USER} sudo
 RUN echo ${CONFIGURED_USER}\:${CONFIGURED_USER}\ root\:${CONFIGURED_PASSWD} | chpasswd
