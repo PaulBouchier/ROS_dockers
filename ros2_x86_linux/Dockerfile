@@ -1,6 +1,6 @@
-ARG ROS_DISTRO=humble
+ARG ROS_DISTRO=jazzy
 
-FROM osrf/ros:${ROS_DISTRO}-desktop-full-jammy as base
+FROM osrf/ros:${ROS_DISTRO}-desktop-full-noble AS base
 ENV ROS_DISTRO=${ROS_DISTRO}
 ENV TZ="America/Chicago"
 
@@ -25,9 +25,9 @@ RUN apt-get -qq --no-install-recommends install ros-${ROS_DISTRO}-plotjuggler
 RUN apt-get -qq --no-install-recommends install ros-${ROS_DISTRO}-plotjuggler-ros
 RUN apt-get -qq --no-install-recommends install python3-colcon-common-extensions
 RUN apt-get -qq --no-install-recommends install ros-${ROS_DISTRO}-tf-transformations
-RUN pip3 install transforms3d
 RUN apt-get -qq --no-install-recommends install nano
-RUN pip install setuptools==58.2.0
+# RUN pip3 install transforms3d
+#RUN pip install setuptools==58.2.0
 
 # Configure sudo.
 RUN ex +"%s/^%sudo.*$/%sudo ALL=(ALL:ALL) NOPASSWD:ALL/g" -scwq! /etc/sudoers
@@ -41,8 +41,14 @@ ARG CONFIGURED_PASSWD=Docker
 ARG DISPLAY=:1
 ENV DISPLAY=${DISPLAY}
 
-RUN groupadd ${CONFIGURED_USER} && useradd -ms /bin/bash -g ${CONFIGURED_USER} ${CONFIGURED_USER}
-RUN adduser ${CONFIGURED_USER} sudo
+# for 24.04 there is a default user "ubuntu with UID/GID 1000. Change this user & group to ${CONFIGURED_USER}
+RUN usermod -l ${CONFIGURED_USER} -d /home/${CONFIGURED_USER} ubuntu
+RUN groupmod -n ${CONFIGURED_USER} ubuntu
+RUN cp -r /home/ubuntu /home/${CONFIGURED_USER}
+RUN chown ${CONFIGURED_USER}:${CONFIGURED_USER} /home/${CONFIGURED_USER}
+RUN chown ${CONFIGURED_USER}:${CONFIGURED_USER} /home/${CONFIGURED_USER}/.?*
+#RUN groupadd -${CONFIGURED_USER} && useradd -ms /bin/bash -g ${CONFIGURED_USER} ${CONFIGURED_USER}
+#RUN adduser ${CONFIGURED_USER} sudo
 RUN echo ${CONFIGURED_USER}\:${CONFIGURED_USER}\ root\:${CONFIGURED_PASSWD} | chpasswd
 
 # Use ccache
