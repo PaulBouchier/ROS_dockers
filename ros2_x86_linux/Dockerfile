@@ -11,7 +11,7 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
 # Install Git and other utilities from us.archive.ubuntu.com
 RUN apt-get -qq update
 RUN apt-get -y upgrade
-RUN apt-get -qq --no-install-recommends install apt-utils
+#RUN apt-get -qq --no-install-recommends install apt-utils
 RUN apt-get -qq --no-install-recommends install git vim-gtk3 sudo less \
   && apt-get -qq --no-install-recommends install inetutils-ping inetutils-traceroute net-tools \
   && apt-get -qq --no-install-recommends install xterm terminator \
@@ -24,9 +24,10 @@ RUN apt-get -qq --no-install-recommends install ros-${ROS_DISTRO}-swri-console
 RUN apt-get -qq --no-install-recommends install ros-${ROS_DISTRO}-plotjuggler
 RUN apt-get -qq --no-install-recommends install ros-${ROS_DISTRO}-plotjuggler-ros
 RUN apt-get -qq --no-install-recommends install python3-colcon-common-extensions
-RUN apt-get -qq --no-install-recommends install ros-${ROS_DISTRO}-tf-transformations
 RUN apt-get -qq --no-install-recommends install nano
-# RUN pip3 install transforms3d
+
+# no jazzy release of the following
+RUN apt-get -qq --no-install-recommends install python3-transforms3d
 #RUN pip install setuptools==58.2.0
 
 # Configure sudo.
@@ -52,12 +53,12 @@ RUN chown ${CONFIGURED_USER}:${CONFIGURED_USER} /home/${CONFIGURED_USER}/.?*
 RUN echo ${CONFIGURED_USER}\:${CONFIGURED_USER}\ root\:${CONFIGURED_PASSWD} | chpasswd
 
 # Use ccache
-ENV USE_CCACHE 1
-ENV NDK_CCACHE /usr/bin/ccache
-ENV CCACHE_DIR /opt/workspace/ccache
-ENV PATH /usr/lib/ccache:$PATH
+ENV USE_CCACHE=1
+ENV NDK_CCACHE=/usr/bin/ccache
+ENV CCACHE_DIR=/opt/workspace/ccache
+ENV PATH=/usr/lib/ccache:$PATH
 
-ENV QT_GRAPHICSSYSTEM native
+ENV QT_GRAPHICSSYSTEM=native
 
 # add environment changes to .bashrc
 WORKDIR /home/${CONFIGURED_USER}

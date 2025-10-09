@@ -46,12 +46,12 @@ RUN adduser ${CONFIGURED_USER} sudo
 RUN echo ${CONFIGURED_USER}\:${CONFIGURED_USER}\ root\:Docker | chpasswd
 
 # Use ccache
-ENV USE_CCACHE 1
-ENV NDK_CCACHE /usr/bin/ccache
-ENV CCACHE_DIR /opt/workspace/ccache
-ENV PATH /usr/lib/ccache:$PATH
+ENV USE_CCACHE=1
+ENV NDK_CCACHE=/usr/bin/ccache
+ENV CCACHE_DIR=/opt/workspace/ccache
+ENV PATH=/usr/lib/ccache:$PATH
 
-ENV QT_GRAPHICSSYSTEM native
+ENV QT_GRAPHICSSYSTEM=native
 
 # add environment changes to .bashrc
 WORKDIR /home/${CONFIGURED_USER} 

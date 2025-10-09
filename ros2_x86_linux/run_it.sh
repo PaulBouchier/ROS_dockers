@@ -23,6 +23,7 @@ docker run                                                     \
     --privileged                                               \
     -v $HOME/.bash_history:$HOME/.bash_history                 \
     -v $HOME/ros2_ws:$HOME/ros2_ws                             \
+    -v $HOME/ws_rmw_zenoh:$HOME/ws_rmw_zenoh                             \
     -v $HOME/bag_files:$HOME/bag_files                         \
     -v /tmp/.X11-unix:/tmp/.X11-unix                           \
     -v /tmp:/tmp                                               \
