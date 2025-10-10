@@ -23,6 +23,8 @@ RUN apt-get -qq --no-install-recommends install git vim-gtk3 sudo less \
 RUN apt-get -qq --no-install-recommends install ros-${ROS_DISTRO}-swri-console
 RUN apt-get -qq --no-install-recommends install ros-${ROS_DISTRO}-plotjuggler
 RUN apt-get -qq --no-install-recommends install ros-${ROS_DISTRO}-plotjuggler-ros
+RUN apt-get -qq --no-install-recommends install ros-${ROS_DISTRO}-demo-nodes-py
+RUN apt-get -qq --no-install-recommends install ros-${ROS_DISTRO}-rmw-zenoh-cpp
 RUN apt-get -qq --no-install-recommends install python3-colcon-common-extensions
 RUN apt-get -qq --no-install-recommends install nano
 
