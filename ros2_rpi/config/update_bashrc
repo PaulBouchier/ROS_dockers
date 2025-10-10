@@ -1,7 +1,10 @@
 # Adding all the necessary ros sourcing
 echo "" >> ~/.bashrc
 echo "## ROS" >> ~/.bashrc
-echo "export RMW_IMPLEMENTATION=rmw_zenoh_cpp" >> ~/.bashrc
+
+# uncomment the following line to use zenoh by default
+# echo "export RMW_IMPLEMENTATION=rmw_zenoh_cpp" >> ~/.bashrc
+
 echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc
 echo "source ~/ros2_ws/install/setup.bash" >> ~/.bashrc
 echo "export ROS_DOMAIN_ID=0" >> ~/.bashrc
